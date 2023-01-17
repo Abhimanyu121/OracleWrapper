@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "../interfaces/IBaseWrapper.sol";
+import "hardhat/console.sol";
 
 pragma solidity ^0.8.13;
 
@@ -15,8 +16,9 @@ contract ChainlinkWrapper is IBaseWrapper {
             uint8
         )
     {
+        address priceFeedAddress = abi.decode(encodedData, (address));
         AggregatorV3Interface priceFeed = AggregatorV3Interface(
-            abi.decode(encodedData, (address))
+            priceFeedAddress
         );
         (
             ,

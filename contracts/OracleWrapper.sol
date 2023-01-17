@@ -8,8 +8,8 @@ contract PrimaryWrapper is Ownable {
         IBaseWrapper module;
         bytes queryData;
     }
-    mapping(bytes => Query) queries;
-    mapping(address => bool) supportedModules;
+    mapping(bytes => Query) public queries;
+    mapping(address => bool) public supportedModules;
 
     event ModuleAdded(address indexed moduleAddress);
 
@@ -19,7 +19,7 @@ contract PrimaryWrapper is Ownable {
         bytes indexed queryData
     );
 
-    function getPrice(bytes calldata _queryData)
+    function getPrice(bytes calldata _queryId)
         external
         view
         returns (
@@ -28,7 +28,7 @@ contract PrimaryWrapper is Ownable {
             uint8
         )
     {
-        Query memory query = queries[_queryData];
+        Query memory query = queries[_queryId];
         return query.module.getPrice(query.queryData);
     }
 
@@ -50,6 +50,3 @@ contract PrimaryWrapper is Ownable {
         emit ModuleAdded(moduleAddress);
     }
 }
-
-//oracle will have oracle data with module address
-// abi encoded data
