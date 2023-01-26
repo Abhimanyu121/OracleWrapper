@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 import "./interfaces/IBaseWrapper.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PrimaryWrapper is Ownable {
+contract OracelWrapper is Ownable {
     struct Query {
         IBaseWrapper module;
         bytes queryData;
